@@ -1,4 +1,4 @@
-### Development
+## Development
 
 Start application with:
 
@@ -16,30 +16,28 @@ To access and change data via the console
     $ require './app.rb'
     $ Site.all.first
     
-### Steps to take
+## Twilio Setup
 
 1. Get a Twilio SMS account and add your phone number and keys to your .env file
-2. Add your keys to Heroku config
+2. Add your Twilio keys to Heroku config
 
+````
     $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
-    
-3. 
-    
-### Datamapper Basics
+````
 
-Create
-=====
+    
+## Datamapper Basics
+
+*Create*
 
     $ Site.create(url: "http://laternote.com")
 
-Find
-=====
+*Find*
 
     $ Site.get(1)
     $ Site.first(:url => "http://laternote.com")
 
-Destroy
-=====
+*Destroy*
 
     $ site = Site.get(5)
     $ site.destroy  # => true
