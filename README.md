@@ -25,6 +25,15 @@ To access and change data via the console
 $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
 ````
     
+## Heroku Scheduler
+
+In order to check to see if a site is "UP" or "DOWN" you will need to setup a scheduled rake task using Heroku's Scheduler
+
+    $ heroku addons:add scheduler:standard
+    $ heroku addons:open scheduler
+    
+![Heroku Scheduler](http://f.cl.ly/items/0S3n1D3K1n2g41391Q1N/Screen%20Shot%202013-05-23%20at%2010.35.18%20AM.png)  
+  
 ## Datamapper Basics
 
 **Create**
