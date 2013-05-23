@@ -1,3 +1,5 @@
+### Development
+
 Start application with:
 
     $ bundle
@@ -9,11 +11,21 @@ Or if using Foreman, .env, and a Procfile
     $ foreman start
 
 To access and change data via the console
-=====
 
     $ irb
     $ require './app.rb'
     $ Site.all.first
+    
+### Steps to take
+
+1. Get a Twilio SMS account and add your phone number and keys to your .env file
+2. Add your keys to Heroku config
+
+    $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
+    
+3. 
+    
+### Datamapper Basics
 
 Create
 =====
