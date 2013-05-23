@@ -14,7 +14,16 @@ To access and change data via the console
 
     $ irb
     $ require './app.rb'
-    $ Site.all.first
+    
+Create your first Site
+
+    $ Site.create(url: "http://andrewgertig.com")
+    
+Open your browser to whichever PORT you are using, (for me I have it set to PORT=5002 in my .env file) and you should see something like this:
+
+![Heroku Scheduler](assets/site-demo.png)
+
+Green means the site is up, Red means its down. I used to own two.io but couldn't ever figure out what to do with it :disappointed:
     
 ## Twilio Setup
 
@@ -40,12 +49,12 @@ Create a Job that runs "rake check\_sites" every 10 minutes, it should look like
 
 **Create**
 
-    $ Site.create(url: "http://laternote.com")
+    $ Site.create(url: "http://andrewgertig.com")
 
 **Find**
 
     $ Site.get(1)
-    $ Site.first(:url => "http://laternote.com")
+    $ Site.first(:url => "http://andrewgertig.com")
 
 **Destroy**
 
