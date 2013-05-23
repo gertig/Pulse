@@ -28,6 +28,8 @@ end
 
 class TwilioManager
   def self.send_text(message)
+    return false if MY_TWILIO_NUM.nil?
+
     d = {
         'From' => MY_TWILIO_NUM,
         'To' => MY_TWILIO_NUM,
