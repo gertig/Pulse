@@ -1,0 +1,56 @@
+<style type="text/css" media="screen">
+body {
+	width: 100%;
+	height: 100%;
+	background: #DDD;
+	font-family: "Helvetica Neue","Nimbus Sans",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #343434;
+}
+
+#sites {
+/*  background: #FFF;*/
+	margin: 20px auto 0;
+/*  padding: 20px;*/
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.35);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+	margin-bottom: 3em;
+	width: 600px;
+}
+
+#sites ul {
+  padding: 0;
+}
+
+#sites ul li {
+  list-style: none;
+  padding: 10px;
+  font-size: 1.4em;
+  color: #EEE;
+  text-shadow: 0px 1px 1px #000;
+/*  border-bottom: 1px solid #CCC;*/
+}
+
+#sites ul li.up {
+  background: #24CE32;
+}
+
+#sites ul li.down {
+  background: #FF2B38;
+}
+
+</style>
+
+<h2>Uptime</h2>
+<div id="sites" class="class-name">
+  <ul>
+    <% Site.all.each do |site| %>
+    <li class="<%= site.current_status %>"><%= site.url %></li>
+    <% end %>
+    
+  </ul>
+</div>
