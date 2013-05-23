@@ -22,22 +22,21 @@ To access and change data via the console
 2. Add your Twilio keys to Heroku config
 
 ````
-    $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
+$ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
 ````
-
     
 ## Datamapper Basics
 
-*Create*
+**Create**
 
     $ Site.create(url: "http://laternote.com")
 
-*Find*
+**Find**
 
     $ Site.get(1)
     $ Site.first(:url => "http://laternote.com")
 
-*Destroy*
+**Destroy**
 
     $ site = Site.get(5)
     $ site.destroy  # => true
