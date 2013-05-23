@@ -32,7 +32,7 @@ In order to check to see if a site is "UP" or "DOWN" you will need to setup a sc
     $ heroku addons:add scheduler:standard
     $ heroku addons:open scheduler
     
-Create a Job that runs "rake check\_sites"    
+Create a Job that runs "rake check\_sites" every 10 minutes, it should look like this once you are done: 
 
 ![Heroku Scheduler](assets/heroku-scheduler.png)  
   
