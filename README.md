@@ -19,11 +19,11 @@ Create your first Site
 
     $ Site.create(url: "http://andrewgertig.com")
     
-Open your browser to whichever PORT you are using, (for me I have it set to PORT=5002 in my .env file) and you should see something like this:
+Open your browser to whichever PORT you are using, (for me I have it set to PORT=5002 in my .env file so http://localhost:5002) and you should see something like this:
 
 ![Heroku Scheduler](assets/site-demo.png)
 
-Green means the site is up, Red means its down. I used to own two.io but couldn't ever figure out what to do with it :disappointed:
+Green means the site is up, Red means it's down. I used to own two.io but couldn't ever figure out what to do with it :disappointed:
     
 ## Twilio Setup
 
