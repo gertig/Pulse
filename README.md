@@ -1,25 +1,35 @@
 Start application with:
-$ bundle
-$ createdb yourappname
-$ shotgun app.rb
+
+    $ bundle
+    $ createdb yourappname
+    $ shotgun app.rb
+    
+Or if using Foreman, .env, and a Procfile
+    
+    $ foreman start
 
 To access and change data via the console
+=====
 
-$ irb
-$ require './app.rb'
-$ Site.all.first
+    $ irb
+    $ require './app.rb'
+    $ Site.all.first
 
-### Create
-$ Site.create(url: "http://laternote.com")
+Create
+=====
 
-### Find
-$ Site.get(1)
-$ Site.first(:url => "http://laternote.com")
+    $ Site.create(url: "http://laternote.com")
 
-### Destroy
+Find
+=====
 
-$ site = Site.get(5)
-$ site.destroy  # => true
+    $ Site.get(1)
+    $ Site.first(:url => "http://laternote.com")
 
-### Datamapper Documentation
-[Datamapper](http://datamapper.org/docs/)
+Destroy
+=====
+
+    $ site = Site.get(5)
+    $ site.destroy  # => true
+
+####[Datamapper Documentation](http://datamapper.org/docs/)
