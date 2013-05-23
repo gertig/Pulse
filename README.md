@@ -1,12 +1,17 @@
-## Development
+## What is Uptime?
+
+Uptime is a Sinatra application that can be used to check to see if a website is currently up or down and then send you a Text message to alert of its change in status.
+
+## Getting Started
 
 Start application with:
 
+    $ git clone git://github.com/AndrewGertig/uptime.git
+    $ cd uptime
     $ bundle
     $ createdb yourappname
-    $ shotgun app.rb
     
-Or if using Foreman, .env, and a Procfile
+Using [Foreman, .env, and a Procfile](https://devcenter.heroku.com/articles/procfile#developing-locally-with-foreman)
     
     $ foreman start
 
@@ -27,8 +32,9 @@ Green means the site is up, Red means it's down. I used to own two.io but couldn
     
 ## Twilio Setup
 
-1. Get a Twilio SMS account and add your phone number and keys to your .env file
-2. Add your Twilio keys to Heroku config
+1. Get a Twilio SMS account
+2. Add your phone number and keys to your .env file
+3. Add your Twilio keys to Heroku config
 
 ````
 $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
