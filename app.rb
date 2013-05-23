@@ -12,14 +12,14 @@ TWILIO_ACCOUNT_TOKEN = ENV["TWILIO_ACCOUNT_TOKEN"]
 
 class Site
   include DataMapper::Resource
-  
+
   property :id, Serial
   property :url, String
   property :last_check, DateTime
   property :status_changed, DateTime
   property :current_status, String, :default => "up"
   property :notify, Boolean, :default => true
-  
+
   validates_uniqueness_of :url
   def down?
     current_status == 'down'
@@ -27,13 +27,15 @@ class Site
 end
 
 class TwilioManager
-  def self.send_text(to, message)
+  def self.send_text(message)
+    return false if MY_TWILIO_NUM.nil?
+
     d = {
         'From' => MY_TWILIO_NUM,
-        'To' => to,
+        'To' => MY_TWILIO_NUM,
         'Body' =>  message
     }
-    
+
     begin
         account = Twilio::RestAccount.new(TWILIO_ACCOUNT_SID, TWILIO_ACCOUNT_TOKEN)
         resp = account.request(
@@ -60,22 +62,22 @@ end
 ###################
 def check_site(site)
   site.last_check = Time.now
-    
+
   status = result = nil
   (1..3).each do |x|
     begin
       result = get_url(site.url)
       status = is_down?(result) ? 'down' : 'up'
-      
+
     rescue Faraday::Error::ConnectionFailed
       puts "That is not a real site"
       status = "down"
     end
-      
+
     break if status == 'up'
     sleep(1)
   end
-  
+
   if site.current_status != status
     site.current_status = status
     site.status_changed = site.last_check
@@ -102,5 +104,5 @@ def is_down?(result)
 end
 
 def notify_change(site)
-  TwilioManager.send_text("7044583016", "#{site.url} is #{site.current_status}")
+  TwilioManager.send_text("#{site.url} is #{site.current_status}")
 end
