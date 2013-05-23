@@ -5,7 +5,7 @@ require 'twiliolib'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/uptime')
 
-MY_CELL_PHONE = EVN["MY_CELL_PHONE"]
+MY_CELL_PHONE = ENV["MY_CELL_PHONE"]
 MY_TWILIO_NUM = ENV["MY_TWILIO_NUM"]
 TWILIO_API_VERSION = "2010-04-01"
 TWILIO_ACCOUNT_SID = ENV["TWILIO_ACCOUNT_SID"]
