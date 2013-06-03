@@ -58,6 +58,11 @@ Create a Job that runs "rake check\_sites" every 10 minutes, it should look like
 
 ![Heroku Scheduler](assets/heroku-scheduler.png)  
   
+## Configuring Your Heroku Instance
+
+To use the `Datamapper` methods (below), you need to remotely connect to the console on Heroku. To do this, run: `heroku run console` then `require './app.rb'`
+
+
 ## Datamapper Basics
 
 **Create**
