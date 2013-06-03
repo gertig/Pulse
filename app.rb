@@ -6,6 +6,7 @@ require 'twiliolib'
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/uptime')
 
 MY_CELL_PHONE = ENV["MY_CELL_PHONE"]
+MY_EMAIL_ADDRESS = ENV["MY_EMAIL_ADDRESS"]
 MY_TWILIO_NUM = ENV["MY_TWILIO_NUM"]
 TWILIO_API_VERSION = "2010-04-01"
 TWILIO_ACCOUNT_SID = ENV["TWILIO_ACCOUNT_SID"]
@@ -13,30 +14,36 @@ TWILIO_ACCOUNT_TOKEN = ENV["TWILIO_ACCOUNT_TOKEN"]
 
 class Site
   include DataMapper::Resource
-  
+
   property :id, Serial
   property :url, String
   property :last_check, DateTime
   property :status_changed, DateTime
   property :current_status, String, :default => "up"
   property :notify, Boolean, :default => true
-  
+
   validates_uniqueness_of :url
   def down?
     current_status == 'down'
   end
 end
 
-class TwilioManager
+class NotificationManager
+
+  def self.notify(message)
+    NotificationManager.send_text message
+    NotificationManager.send_email message
+  end
+
   def self.send_text(message)
     return false if MY_TWILIO_NUM.nil?
-    
+
     d = {
         'From' => MY_TWILIO_NUM,
         'To' => MY_CELL_PHONE,
         'Body' =>  message
     }
-    
+
     begin
         account = Twilio::RestAccount.new(TWILIO_ACCOUNT_SID, TWILIO_ACCOUNT_TOKEN)
         resp = account.request(
@@ -47,6 +54,27 @@ class TwilioManager
         redirect_to({ :action => '.', 'msg' => "Error #{ bang }" })
         return
     end
+  end
+
+  def self.send_email(message)
+    return false if ENV['SENDGRID_USERNAME'].nil? || MY_EMAIL_ADDRESS.nil?
+
+    Pony.options = {
+      :from => "#{MY_EMAIL_ADDRESS}<#{MY_EMAIL_ADDRESS}>",
+      :to => MY_EMAIL_ADDRESS,
+      :subject => "Uptime Notification",
+      :body => message,
+      :via => :smtp,
+      :via_options => {
+        :address => 'smtp.sendgrid.net',
+        :port => '587',
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain,
+        :enable_starttls_auto => true
+      }
+    }
   end
 end
 
@@ -63,22 +91,22 @@ end
 ###################
 def check_site(site)
   site.last_check = Time.now
-    
+
   status = result = nil
   (1..3).each do |x|
     begin
       result = get_url(site.url)
       status = is_down?(result) ? 'down' : 'up'
-      
+
     rescue Faraday::Error::ConnectionFailed
       puts "That is not a real site"
       status = "down"
     end
-      
+
     break if status == 'up'
     sleep(1)
   end
-  
+
   if site.current_status != status
     site.current_status = status
     site.status_changed = site.last_check
@@ -105,5 +133,5 @@ def is_down?(result)
 end
 
 def notify_change(site)
-  TwilioManager.send_text("#{site.url} is #{site.current_status}")
+  NotificationManager.notify "#{site.url} is #{site.current_status}"
 end
