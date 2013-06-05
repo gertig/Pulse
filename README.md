@@ -39,6 +39,13 @@ Green means the site is up, Red means it's down. I used to own two.io but couldn
 ````
 $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXXXXXX TWILIO_ACCOUNT_TOKEN=XXXXXXXXTOKENXXXXXXXX
 ````
+
+## SendGrid Setup
+
+If you want emails to be sent, configure [SendGrid](https://addons.heroku.com/sendgrid).
+
+1. Run `heroku addons:add sendgrid:starter`
+2. Set your email address `ENV` variable: `heroku config:add MY_EMAIL_ADDRESS=me@here.com`
     
 ## Heroku Scheduler
 
@@ -51,6 +58,11 @@ Create a Job that runs "rake check\_sites" every 10 minutes, it should look like
 
 ![Heroku Scheduler](assets/heroku-scheduler.png)  
   
+## Configuring Your Heroku Instance
+
+To use the `Datamapper` methods (below), you need to remotely connect to the console on Heroku. To do this, run: `heroku run console` then `require './app.rb'`
+
+
 ## Datamapper Basics
 
 **Create**
