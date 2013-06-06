@@ -1,16 +1,15 @@
 require 'sinatra'
 require 'data_mapper'
 require 'faraday'
-# require 'twiliolib'
 require 'twilio-ruby'
 require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/uptime')
 
 MY_CELL_PHONE = ENV["MY_CELL_PHONE"]
-MY_EMAIL_ADDRESS = ENV["MY_EMAIL_ADDRESS"]
+FROM_EMAIL_ADDRESS = ENV["FROM_EMAIL_ADDRESS"]
+TO_EMAIL_ADDRESS = ENV["TO_EMAIL_ADDRESS"]
 MY_TWILIO_NUM = ENV["MY_TWILIO_NUM"]
-TWILIO_API_VERSION = "2010-04-01"
 TWILIO_ACCOUNT_SID = ENV["TWILIO_ACCOUNT_SID"]
 TWILIO_ACCOUNT_TOKEN = ENV["TWILIO_ACCOUNT_TOKEN"]
 
@@ -57,12 +56,12 @@ class NotificationManager
   end
 
   def self.send_email(message)
-    return false if MY_EMAIL_ADDRESS.nil?
+    return false if FROM_EMAIL_ADDRESS.nil?
     
     if !ENV['SENDGRID_USERNAME'].nil?
       Pony.options = {
-        :from => "#{MY_EMAIL_ADDRESS} <#{MY_EMAIL_ADDRESS}>",
-        :to => MY_EMAIL_ADDRESS,
+        :from => '"Uptime" <#{FROM_EMAIL_ADDRESS}>',
+        :to => TO_EMAIL_ADDRESS,
         :subject => "Uptime Notification",
         :body => message,
         :via => :smtp,
@@ -77,9 +76,13 @@ class NotificationManager
         }
       }
     elsif !ENV['MANDRILL_USERNAME'].nil?
-      Pony.options = {
-        :from => "#{MY_EMAIL_ADDRESS} <#{MY_EMAIL_ADDRESS}>",
-        :to => MY_EMAIL_ADDRESS,
+      puts "Trying to send an email with Mandrill"
+      
+      from = '"Uptime" ' + "<#{FROM_EMAIL_ADDRESS}>"
+      
+      client = Pony.options = {
+        :from => FROM_EMAIL_ADDRESS,
+        :to => TO_EMAIL_ADDRESS,
         :subject => "Uptime Notification",
         :body => message,
         :via => :smtp,
@@ -92,6 +95,8 @@ class NotificationManager
           :enable_starttls_auto => true
         }
       }
+      
+      puts "#{client}"
     else
       return false
     end
