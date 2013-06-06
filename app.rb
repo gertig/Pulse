@@ -1,7 +1,9 @@
 require 'sinatra'
 require 'data_mapper'
 require 'faraday'
-require 'twiliolib'
+# require 'twiliolib'
+require 'twilio-ruby'
+require 'pony'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/uptime')
 
@@ -34,26 +36,24 @@ class NotificationManager
     NotificationManager.send_text message
     NotificationManager.send_email message
   end
-
+  
   def self.send_text(message)
-    return false if MY_TWILIO_NUM.nil?
+    # Create a Twilio REST client object using your Twilio account ID and token
+    client = Twilio::REST::Client.new(TWILIO_ACCOUNT_SID, TWILIO_ACCOUNT_TOKEN)
 
-    d = {
-        'From' => MY_TWILIO_NUM,
-        'To' => MY_CELL_PHONE,
-        'Body' =>  message
-    }
-
+    # Send the request and get a response
     begin
-        account = Twilio::RestAccount.new(TWILIO_ACCOUNT_SID, TWILIO_ACCOUNT_TOKEN)
-        resp = account.request(
-            "/#{TWILIO_API_VERSION}/Accounts/#{TWILIO_ACCOUNT_SID}/SMS/Messages",
-            'POST', d)
-        resp.error! unless resp.kind_of? Net::HTTPSuccess
-    rescue StandardError => bang
-        redirect_to({ :action => '.', 'msg' => "Error #{ bang }" })
-        return
+      client.account.sms.messages.create({
+        :from => MY_TWILIO_NUM,
+        :to => MY_CELL_PHONE,
+        :body => message
+      })
+    rescue Exception => e
+      puts "Could not send SMS via Twilio"
+      return
     end
+
+    # Handle success case...
   end
 
   def self.send_email(message)
