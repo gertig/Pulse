@@ -6,7 +6,8 @@ gem 'pg'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'faraday'
-gem 'twiliolib'
+# gem 'twiliolib'
+gem 'twilio-ruby'
 gem 'pony'
 
 # Delayed Job potential addition
