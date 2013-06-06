@@ -46,6 +46,13 @@ If you want emails to be sent, configure [SendGrid](https://addons.heroku.com/se
 
 1. Run `heroku addons:add sendgrid:starter`
 2. Set your email address `ENV` variable: `heroku config:add MY_EMAIL_ADDRESS=me@here.com`
+
+## Mandrill Setup
+
+If you want emails to be sent by [Mandrill by MailChimp](http://mandrillapp.com) setup the [Heroku addon](https://addons.heroku.com/mandrill) like this.
+
+1. Run `heroku addons:add mandrill:starter`
+2. Set your email address `ENV` variable: `heroku config:add MY_EMAIL_ADDRESS=me@here.com`
     
 ## Heroku Scheduler
 
@@ -73,6 +80,10 @@ To use the `Datamapper` methods (below), you need to remotely connect to the con
 
     $ Site.get(1)
     $ Site.first(:url => "http://andrewgertig.com")
+    
+**Update**
+    
+    $ Site.get(1).update(url: "http://gertig.com")
 
 **Destroy**
 

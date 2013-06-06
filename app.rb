@@ -57,25 +57,47 @@ class NotificationManager
   end
 
   def self.send_email(message)
-    return false if ENV['SENDGRID_USERNAME'].nil? || MY_EMAIL_ADDRESS.nil?
-
-    Pony.options = {
-      :from => "#{MY_EMAIL_ADDRESS}<#{MY_EMAIL_ADDRESS}>",
-      :to => MY_EMAIL_ADDRESS,
-      :subject => "Uptime Notification",
-      :body => message,
-      :via => :smtp,
-      :via_options => {
-        :address => 'smtp.sendgrid.net',
-        :port => '587',
-        :domain => ENV['SENDGRID_DOMAIN'],
-        :user_name => ENV['SENDGRID_USERNAME'],
-        :password => ENV['SENDGRID_PASSWORD'],
-        :authentication => :plain,
-        :enable_starttls_auto => true
+    return false if MY_EMAIL_ADDRESS.nil?
+    
+    if !ENV['SENDGRID_USERNAME'].nil?
+      Pony.options = {
+        :from => "#{MY_EMAIL_ADDRESS} <#{MY_EMAIL_ADDRESS}>",
+        :to => MY_EMAIL_ADDRESS,
+        :subject => "Uptime Notification",
+        :body => message,
+        :via => :smtp,
+        :via_options => {
+          :address => 'smtp.sendgrid.net',
+          :port => '587',
+          :domain => ENV['SENDGRID_DOMAIN'],
+          :user_name => ENV['SENDGRID_USERNAME'],
+          :password => ENV['SENDGRID_PASSWORD'],
+          :authentication => :plain,
+          :enable_starttls_auto => true
+        }
       }
-    }
+    elsif !ENV['MANDRILL_USERNAME'].nil?
+      Pony.options = {
+        :from => "#{MY_EMAIL_ADDRESS} <#{MY_EMAIL_ADDRESS}>",
+        :to => MY_EMAIL_ADDRESS,
+        :subject => "Uptime Notification",
+        :body => message,
+        :via => :smtp,
+        :via_options => {
+          :address => 'smtp.mandrillapp.com',
+          :port => '587',
+          :user_name => ENV['MANDRILL_USERNAME'],
+          :password => ENV['MANDRILL_APIKEY'],
+          :authentication => :login,
+          :enable_starttls_auto => true
+        }
+      }
+    else
+      return false
+    end
+      
   end
+
 end
 
 # DataMapper.finalize.auto_upgrade!
@@ -122,7 +144,7 @@ def get_url(uri)
     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
   end
 
-  response = conn.get #'/nigiri/sake.json'
+  response = conn.get
   response.status
   # response.response.kind_of?(Net::HTTPSuccess)
 end
