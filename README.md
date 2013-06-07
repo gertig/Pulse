@@ -45,14 +45,14 @@ $ heroku config:add MY_TWILIO_NUM=5558675309 TWILIO_ACCOUNT_SID=XXXXXXXXXSIDXXXX
 If you want emails to be sent, configure [SendGrid](https://addons.heroku.com/sendgrid).
 
 1. Run `heroku addons:add sendgrid:starter`
-2. Set your email address `ENV` variable: `heroku config:add MY_EMAIL_ADDRESS=me@here.com`
+2. Set your email address `ENV` variable: `heroku config:add FROM_EMAIL_ADDRESS=me@here.com TO_EMAIL_ADDRESS=you@there.com`
 
 ## Mandrill Setup
 
 If you want emails to be sent by [Mandrill by MailChimp](http://mandrillapp.com) setup the [Heroku addon](https://addons.heroku.com/mandrill) like this.
 
 1. Run `heroku addons:add mandrill:starter`
-2. Set your email address `ENV` variable: `heroku config:add MY_EMAIL_ADDRESS=me@here.com`
+2. Set your email address `ENV` variable: `heroku config:add FROM_EMAIL_ADDRESS=me@here.com TO_EMAIL_ADDRESS=you@there.com`
     
 ## Heroku Scheduler
 
