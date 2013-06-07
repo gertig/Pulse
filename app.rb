@@ -59,11 +59,8 @@ class NotificationManager
     return false if FROM_EMAIL_ADDRESS.nil?
     
     if !ENV['SENDGRID_USERNAME'].nil?
+      # Set the options for SendGrid
       Pony.options = {
-        :from => '"Uptime" <#{FROM_EMAIL_ADDRESS}>',
-        :to => TO_EMAIL_ADDRESS,
-        :subject => "Uptime Notification",
-        :body => message,
         :via => :smtp,
         :via_options => {
           :address => 'smtp.sendgrid.net',
@@ -75,16 +72,10 @@ class NotificationManager
           :enable_starttls_auto => true
         }
       }
+      
     elsif !ENV['MANDRILL_USERNAME'].nil?
-      puts "Trying to send an email with Mandrill"
-      
-      from = '"Uptime" ' + "<#{FROM_EMAIL_ADDRESS}>"
-      
-      client = Pony.options = {
-        :from => FROM_EMAIL_ADDRESS,
-        :to => TO_EMAIL_ADDRESS,
-        :subject => "Uptime Notification",
-        :body => message,
+      # Set the options for Mandrill
+      Pony.options = {
         :via => :smtp,
         :via_options => {
           :address => 'smtp.mandrillapp.com',
@@ -96,10 +87,14 @@ class NotificationManager
         }
       }
       
-      puts "#{client}"
     else
       return false
     end
+    
+    # Send the email
+    Pony.mail(:from => '"Uptime" ' + "<#{FROM_EMAIL_ADDRESS}>",
+              :subject => "Notification",
+              :body => message,:to => TO_EMAIL_ADDRESS)
       
   end
 
