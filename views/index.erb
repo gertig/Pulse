@@ -54,9 +54,7 @@ transform: rotate(-20deg);*/
 }
 
 #sites {
-/*  background: #FFF;*/
 	margin: 20px auto 0;
-/*  padding: 20px;*/
 /*	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
 	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.35);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);*/
@@ -75,22 +73,18 @@ transform: rotate(-20deg);*/
   list-style: none;
   padding: 10px;
   font-size: 1.4em;
+}
+
+#sites ul li a {
   color: #FFF;
-  /*color: #7F8C8D;*/
-  /*text-shadow: 0px 1px 0px #FFF;*/
-  /*text-shadow: 0px 1px 1px #000;*/
-/*  border-bottom: 1px solid #CCC;*/
+  text-decoration: none;
 }
 
 #sites ul li.up {
-  /*background: #24CE32;*/
   background: #2ECC71;
-  /*color: #34495E;*/
-  /*text-shadow: 0px 1px 1px #FFF;*/
 }
 
 #sites ul li.down {
-  /*background: #FF2B38;*/
   background: #E74C3C;
 }
 
@@ -100,7 +94,7 @@ transform: rotate(-20deg);*/
 <div id="sites" class="class-name">
   <ul>
     <% Site.all.each do |site| %>
-    <li class="<%= site.current_status %>"><%= site.url %></li>
+    <li class="<%= site.current_status %>"><a href="<%= site.url %>" target="_blank"><%= site.url %></a></li>
     <% end %>
     
   </ul>
