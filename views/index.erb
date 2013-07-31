@@ -3,23 +3,68 @@ body {
 	width: 100%;
 	height: 100%;
 	background: #DDD;
+  background-image: url('tweed.png'); 
 	font-family: "Helvetica Neue","Nimbus Sans",Helvetica,Arial,"Lucida Grande",sans-serif;
 }
 
 h2 {
+  font-size: 80px; //100px;
+  margin: 55px auto 0;
   text-align: center;
-  color: #343434;
+  color: #fff;
+}
+
+h1 {
+/*  width: 750px;*/
+  font-size: 80px; //100px;
+  margin: 55px auto 0;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0px 0px 2px #686868,
+               0px 1px 1px #ddd,
+               0px 2px 1px #d6d6d6,
+               0px 3px 1px #ccc,
+               0px 4px 1px #c5c5c5,
+               0px 5px 1px #c1c1c1,
+               0px 6px 1px #bbb,
+               0px 7px 1px #777;
+/*               0px 8px 3px rgba(100, 100, 100, 0.4),
+               0px 9px 5px rgba(100, 100, 100, 0.1),
+               0px 10px 7px rgba(100, 100, 100, 0.15),
+               0px 11px 9px rgba(100, 100, 100, 0.2),
+               0px 12px 11px rgba(100, 100, 100, 0.25),
+               0px 13px 15px rgba(100, 100, 100, 0.3);*/
+               
+               
+text-shadow: rgb(187, 187, 187) 0px 1px 0px,
+                rgb(181, 181, 181) 0px 2px 0px,
+                rgb(172, 172, 172) 0px 3px 0px,
+                rgb(160, 160, 160) 0px 4px 0px,
+                rgb(145, 145, 145) 0px 5px 0px,
+                rgb(127, 127, 127) 0px 6px 0px;
+/*                rgba(0, 0, 0, 0.199219) 0px 7px 1px,
+                rgba(0, 0, 0, 0.296875) 0px 8px 6px;*/
+  
+/*-webkit-transform: rotate(-20deg);
+-moz-transform: rotate(-20deg);
+-ms-transform: rotate(-20deg);
+-o-transform: rotate(-20deg);
+transform: rotate(-20deg);*/
+
 }
 
 #sites {
 /*  background: #FFF;*/
 	margin: 20px auto 0;
 /*  padding: 20px;*/
-	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+/*	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
 	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.35);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);*/
 	margin-bottom: 3em;
 	width: 600px;
+
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 22px 70px 4px rgba(0,0,0,0.56), 0 0 0 1px rgba(0, 0, 0, 0.3);
+
 }
 
 #sites ul {
@@ -30,17 +75,23 @@ h2 {
   list-style: none;
   padding: 10px;
   font-size: 1.4em;
-  color: #EEE;
-  text-shadow: 0px 1px 1px #000;
+  color: #FFF;
+  /*color: #7F8C8D;*/
+  /*text-shadow: 0px 1px 0px #FFF;*/
+  /*text-shadow: 0px 1px 1px #000;*/
 /*  border-bottom: 1px solid #CCC;*/
 }
 
 #sites ul li.up {
-  background: #24CE32;
+  /*background: #24CE32;*/
+  background: #2ECC71;
+  /*color: #34495E;*/
+  /*text-shadow: 0px 1px 1px #FFF;*/
 }
 
 #sites ul li.down {
-  background: #FF2B38;
+  /*background: #FF2B38;*/
+  background: #E74C3C;
 }
 
 </style>
