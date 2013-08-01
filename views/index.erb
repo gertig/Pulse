@@ -1,4 +1,7 @@
 <style type="text/css" media="screen">
+
+/** { outline: 1px solid #369; }*/
+
 body {
 	width: 100%;
 	height: 100%;
@@ -7,72 +10,40 @@ body {
 	font-family: "Helvetica Neue","Nimbus Sans",Helvetica,Arial,"Lucida Grande",sans-serif;
 }
 
+div#wrapper {
+  margin: 60px auto 0;
+  width: 600px;
+}
+
 h2 {
-  font-size: 80px; //100px;
-  margin: 55px auto 0;
+  font-size: 4em; //100px;
+  /*margin: 55px auto 0;*/
+  margin: 0;
   text-align: center;
-  color: #fff;
+  color: rgba(0,0,0,.4);
 }
 
-h1 {
-/*  width: 750px;*/
-  font-size: 80px; //100px;
-  margin: 55px auto 0;
-  text-align: center;
-  color: #fff;
-  text-shadow: 0px 0px 2px #686868,
-               0px 1px 1px #ddd,
-               0px 2px 1px #d6d6d6,
-               0px 3px 1px #ccc,
-               0px 4px 1px #c5c5c5,
-               0px 5px 1px #c1c1c1,
-               0px 6px 1px #bbb,
-               0px 7px 1px #777;
-/*               0px 8px 3px rgba(100, 100, 100, 0.4),
-               0px 9px 5px rgba(100, 100, 100, 0.1),
-               0px 10px 7px rgba(100, 100, 100, 0.15),
-               0px 11px 9px rgba(100, 100, 100, 0.2),
-               0px 12px 11px rgba(100, 100, 100, 0.25),
-               0px 13px 15px rgba(100, 100, 100, 0.3);*/
-               
-               
-text-shadow: rgb(187, 187, 187) 0px 1px 0px,
-                rgb(181, 181, 181) 0px 2px 0px,
-                rgb(172, 172, 172) 0px 3px 0px,
-                rgb(160, 160, 160) 0px 4px 0px,
-                rgb(145, 145, 145) 0px 5px 0px,
-                rgb(127, 127, 127) 0px 6px 0px;
-/*                rgba(0, 0, 0, 0.199219) 0px 7px 1px,
-                rgba(0, 0, 0, 0.296875) 0px 8px 6px;*/
-  
-/*-webkit-transform: rotate(-20deg);
--moz-transform: rotate(-20deg);
--ms-transform: rotate(-20deg);
--o-transform: rotate(-20deg);
-transform: rotate(-20deg);*/
-
-}
 
 #sites {
-	margin: 20px auto 0;
-/*	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
-	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.35);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);*/
-	margin-bottom: 3em;
+  margin: 20px auto 0;
 	width: 600px;
-
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 22px 70px 4px rgba(0,0,0,0.56), 0 0 0 1px rgba(0, 0, 0, 0.3);
-
 }
 
 #sites ul {
   padding: 0;
+  margin: 0;
+  padding: 1px 1px 0;
+  background: #FFF;
+
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 22px 70px 4px rgba(0,0,0,0.36), 0 0 0 1px rgba(0, 0, 0, 0.2);
+
 }
 
 #sites ul li {
   list-style: none;
   padding: 10px;
-  font-size: 1.4em;
+  font-size: 1.2em;
+  border-bottom: 1px solid #FFF;
 }
 
 #sites ul li a {
@@ -90,12 +61,14 @@ transform: rotate(-20deg);*/
 
 </style>
 
-<h2>Uptime</h2>
-<div id="sites" class="class-name">
-  <ul>
-    <% Site.all.each do |site| %>
-    <li class="<%= site.current_status %>"><a href="<%= site.url %>" target="_blank"><%= site.url %></a></li>
-    <% end %>
-    
-  </ul>
+<div id="wrapper">
+  <h2>Pulse</h2>
+  <div id="sites">
+    <ul>
+      <% Site.all.each do |site| %>
+      <li class="<%= site.current_status %>"><a href="<%= site.url %>" target="_blank"><%= site.url %></a></li>
+      <% end %>
+      
+    </ul>
+  </div>
 </div>
