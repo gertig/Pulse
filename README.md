@@ -1,13 +1,13 @@
-## What is Uptime?
+## What is Pulse?
 
-Uptime is a Sinatra application that can be used to check to see if a website is currently up or down and then send you a Text message to alert of its change in status.
+Pulse is a Sinatra application that can be used to check to see if a website is currently up or down and then send you a Text message to alert of its change in status.
 
 ## Getting Started
 
 Start application with:
 
-    $ git clone git://github.com/AndrewGertig/uptime.git
-    $ cd uptime
+    $ git clone git://github.com/AndrewGertig/pulse.git
+    $ cd pulse
     $ bundle
     $ createdb yourappname
     
