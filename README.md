@@ -90,4 +90,4 @@ To use the `Datamapper` methods (below), you need to remotely connect to the con
     $ site = Site.get(5)
     $ site.destroy  # => true
 
-####[Datamapper Documentation](http://datamapper.org/docs/)
+#### [Datamapper Documentation](http://datamapper.org/docs/)
